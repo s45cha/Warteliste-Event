@@ -69,9 +69,15 @@
               <!-- 5) Hinweis vor dem Button -->
               <p class="optin-note">Trag dich ein, und wir sagen dir Bescheid, sobald das nächste Event ansteht. Das erste Event startet in den kommenden Wochen.</p>
 
+              <!-- Free-Hinweis: Events sind kostenlos -->
+              <p class="free-note">Wir machen regelmäßig kostenlose Online-Events.</p>
+
               <!-- 6) Call-to-Action – öffnet das Wartelisten-Popup -->
               <div class="cta-row">
-                <button type="button" class="btn" data-open-modal>Auf die Warteliste</button>
+                <button type="button" class="btn btn--stack" data-open-modal>
+                  <span class="btn__main">Unverbindlich in die Warteliste eintragen <span class="btn__arrows" aria-hidden="true">&raquo;</span></span>
+                  <span class="btn__sub">Du wirst als Erstes über neue Events informiert.</span>
+                </button>
               </div>
 
               <!-- 7) Reassurance unter dem Button -->
@@ -156,7 +162,7 @@
             required />
         </div>
 
-        <button type="submit" class="btn btn--block" id="waitlist-submit">Auf die Warteliste</button>
+        <button type="submit" class="btn btn--block" id="waitlist-submit">Setz mich auf die Warteliste</button>
       </form>
 
       <!-- Verstecktes Ziel für die Kit-Übermittlung -->

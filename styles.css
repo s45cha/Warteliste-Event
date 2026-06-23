@@ -203,6 +203,32 @@ body::before {
 .btn:active { transform: translateY(1px); }
 .btn--block { width: 100%; }
 
+/* Button mit Untertext (zweizeilig) */
+.btn--stack {
+  flex-direction: column;
+  gap: 5px;
+  line-height: 1.25;
+  padding-block: 15px;
+  text-align: center;
+}
+.btn__main {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.btn__arrows {
+  font-weight: 700;
+  font-size: 19px;
+  opacity: .9;
+}
+.btn__sub {
+  font-size: 13.5px;
+  font-weight: 500;
+  opacity: .9;
+}
+
 /* ---- Formular (Opt-in) ------------------------------------- */
 .optin {
   position: relative;
@@ -299,6 +325,15 @@ body::before {
 .cta-row { margin-top: clamp(22px, 3vw, 30px); }
 /* Mobil: Button über die volle Breite (sexy) – Desktop: kompakt */
 .cta-row .btn { width: 100%; }
+
+/* Free-Hinweis: Events sind kostenlos */
+.free-note {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 12px 0 0;
+  text-wrap: pretty;
+}
 
 /* Hinweis vor dem Button */
 .optin-note {
