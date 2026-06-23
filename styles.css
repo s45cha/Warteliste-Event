@@ -205,28 +205,29 @@ body::before {
 
 /* Button mit Untertext (zweizeilig) */
 .btn--stack {
+  display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   line-height: 1.25;
-  padding-block: 15px;
+  padding-block: 14px;
   text-align: center;
 }
 .btn__main {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  font-size: 17px;
+  gap: 8px;
+  font-size: 16.5px;
   font-weight: 700;
 }
 .btn__arrows {
   font-weight: 700;
-  font-size: 19px;
-  opacity: .9;
+  font-size: 17px;
+  opacity: .85;
 }
 .btn__sub {
-  font-size: 13.5px;
-  font-weight: 500;
-  opacity: .9;
+  font-size: 12.5px;
+  font-weight: 400;
+  opacity: .82;
 }
 
 /* ---- Formular (Opt-in) ------------------------------------- */
