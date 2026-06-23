@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Warteliste · Entspannt Skalieren</title>
+  <meta name="description" content="Regelmäßige Online-Events rund um ein entspanntes und profitables Online-Business. Trag dich auf die Warteliste ein." />
+
+  <!-- Schriften -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- =========================================================
+       TRACKING (im <head>)
+       ACHTUNG: Vor Livegang prüfen, ob diese Site-IDs auf der neuen Subdomain event.entspanntskalieren.de gültig sind oder ob im jeweiligen Dashboard eine neue Domain/Site-ID angelegt werden muss.
+       Beide Snippets sind absichtlich auskommentiert – vor Livegang einkommentieren.
+       Hinweis: Bringt Vibetrack einen eigenen Cookie-/Consent-Banner mit, ist dieser der EINZIGE Consent-Layer – hier wird bewusst KEIN zweiter, eigener Cookie-Banner eingebaut.
+       ========================================================= -->
+
+  <!-- Rybbit -->
+  <!-- <script defer src="https://app.rybbit.io/api/script.js" data-site-id="d5ad8084cade"></script> -->
+
+  <!-- Vibetrack -->
+  <!-- <script defer src="https://vt.entspanntskalieren.de/script.js" data-site-id="VT-29D4DAB7-68626"></script> -->
+</head>
+
+<body>
+  <div class="page">
+    <main class="page__main">
+
+      <section class="section hero">
+        <div class="container container--wide">
+          <div class="hero__grid">
+
+            <!-- Kopf: Pre-Headline + Headline -->
+            <div class="hero__head">
+              <!-- 1) Pre-Headline -->
+              <p class="pre-headline">Für Coaches, Berater, Dienstleister &amp; Personal Brands mit eigenem Online-Business</p>
+
+              <!-- 2) Haupt-Headline -->
+              <h1 class="headline">Stell dir vor, du hättest zwei Mitgründer mit 10 Jahren Erfahrung und 10 Millionen Euro Gesamtumsatz, die du alles fragen kannst</h1>
+            </div>
+
+            <!-- 3) Mockup: beide Gründer + gemeinsamer Gold Award -->
+            <div class="hero__media">
+              <div class="proof">
+                <div class="proof__photos">
+                  <figure class="proof__photo">
+                    <img src="images/gruender-1.png" alt="Mitgründer mit dem Gold Award" />
+                  </figure>
+                  <figure class="proof__photo">
+                    <img src="images/gruender-2.png" alt="Mitgründer mit dem Gold Award" />
+                  </figure>
+                </div>
+                <div class="proof__award">
+                  <img src="images/gold-award.png" alt="Gold Award – verliehen an Timo Eckhardt &amp; Sascha Boampong für 8.000.000 € Umsatz" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Rest: Subline + Hinweis + Button + Reassurance -->
+            <div class="hero__rest">
+              <!-- 4) Subline -->
+              <p class="subline">Wir machen regelmäßige Online-Events zu allem rund um ein entspanntes und profitables Online-Business. Live und ohne Folien.</p>
+
+              <!-- 5) Hinweis vor dem Button -->
+              <p class="optin-note">Trag dich ein, und wir sagen dir Bescheid, sobald das nächste Event ansteht. Das erste Event startet in den kommenden Wochen.</p>
+
+              <!-- 6) Call-to-Action – öffnet das Wartelisten-Popup -->
+              <div class="cta-row">
+                <button type="button" class="btn" data-open-modal>Auf die Warteliste</button>
+              </div>
+
+              <!-- 7) Reassurance unter dem Button -->
+              <p class="reassurance">Kein Spam. Wir melden uns nur, wenn’s wirklich ein Event gibt.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =====================================================
+         FOOTER (identisch auf allen drei Seiten)
+         ===================================================== -->
+    <footer class="site-footer">
+      <div class="container container--wide site-footer__inner">
+        <span>© 2026 Entspannt Skalieren</span>
+        <span class="site-footer__sep" aria-hidden="true">·</span>
+        <a href="https://entspanntskalieren.de/datenschutz">Datenschutz</a>
+        <span class="site-footer__sep" aria-hidden="true">·</span>
+        <a href="https://entspanntskalieren.de/impressum">Impressum</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- =====================================================
+       WARTELISTEN-POPUP
+       Öffnet sich über den Button „Auf die Warteliste".
+       Enthält das Kit-Formular (Vorname + E-Mail + ein Button).
+       Felder & Button-Text werden im Kit-Formular (data-uid)
+       konfiguriert; Kit übernimmt Bestätigung/Weiterleitung (DOI).
+       ===================================================== -->
+  <div class="modal" id="waitlist-modal" hidden>
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button type="button" class="modal__close" data-close-modal aria-label="Schließen">&times;</button>
+      <h2 class="modal__title" id="modal-title">Auf die Warteliste</h2>
+      <p class="modal__text">Trag Vorname und E-Mail ein – wir sagen dir Bescheid, sobald das nächste Event ansteht.</p>
+
+      <!-- =================================================
+           EIGENES OPT-IN-FORMULAR (im Seiten-Design)
+           Sendet an das Kit-Formular (data-sv-form 9600935) per
+           verstecktem iframe – so gibt es kein CORS-Problem und
+           kein roher JSON-Response wird angezeigt. Felder tragen
+           die von Kit erwarteten Namen:
+             - Vorname  -> name="fields[first_name]"
+             - E-Mail    -> name="email_address"
+           Kit legt die Person als „unbestätigt" an und schickt die
+           Double-Opt-in-Mail. Nach dem Absenden leiten wir selbst
+           auf /fast-geschafft weiter (Bestätigung steht aus).
+           ================================================= -->
+      <form
+        id="waitlist-form"
+        action="https://app.kit.com/forms/9600935/subscriptions"
+        method="post"
+        target="ck-sink"
+        novalidate>
+
+        <p class="form-error" id="form-error" hidden>Bitte gib deinen Vornamen und eine gültige E-Mail-Adresse ein.</p>
+
+        <div class="form-field">
+          <label class="form-field__label" for="first_name">Vorname</label>
+          <input
+            id="first_name"
+            class="input"
+            type="text"
+            name="fields[first_name]"
+            placeholder="Dein Vorname"
+            autocomplete="given-name"
+            required />
+        </div>
+
+        <div class="form-field">
+          <label class="form-field__label" for="email_address">E-Mail-Adresse</label>
+          <input
+            id="email_address"
+            class="input"
+            type="email"
+            name="email_address"
+            placeholder="deine@email.de"
+            autocomplete="email"
+            required />
+        </div>
+
+        <button type="submit" class="btn btn--block" id="waitlist-submit">Auf die Warteliste</button>
+      </form>
+
+      <!-- Verstecktes Ziel für die Kit-Übermittlung -->
+      <iframe name="ck-sink" id="ck-sink" title="Kit" style="display:none" aria-hidden="true"></iframe>
+
+      <p class="reassurance">Kein Spam. Wir melden uns nur, wenn’s wirklich ein Event gibt.</p>
+    </div>
+  </div>
+
+  <!-- Popup-Logik + Formular-Übermittlung an Kit -->
+  <script>
+    (function () {
+      var modal = document.getElementById('waitlist-modal');
+      if (!modal) return;
+      function openModal() {
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+      }
+      document.querySelectorAll('[data-open-modal]').forEach(function (btn) {
+        btn.addEventListener('click', openModal);
+      });
+      modal.querySelectorAll('[data-close-modal]').forEach(function (btn) {
+        btn.addEventListener('click', closeModal);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+
+      // --- Formular an Kit senden, dann auf /fast-geschafft weiterleiten ---
+      var form = document.getElementById('waitlist-form');
+      var sink = document.getElementById('ck-sink');
+      var submit = document.getElementById('waitlist-submit');
+      var errorBox = document.getElementById('form-error');
+      var submitted = false;
+
+      form.addEventListener('submit', function (e) {
+        // Eigene Pflichtfeld-/E-Mail-Prüfung (novalidate -> wir steuern Fehler selbst)
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          errorBox.hidden = false;
+          return;
+        }
+        errorBox.hidden = true;
+        submitted = true;
+        submit.disabled = true;
+        submit.textContent = 'Wird gesendet …';
+        // Native Übermittlung läuft in den versteckten iframe weiter (kein preventDefault).
+      });
+
+      // Sobald Kit geantwortet hat (iframe geladen), zur Pending-Seite weiterleiten.
+      sink.addEventListener('load', function () {
+        if (submitted) window.location.href = 'fast-geschafft.html';
+      });
+      // Sicherheits-Fallback, falls das load-Event ausbleibt.
+      form.addEventListener('submit', function () {
+        setTimeout(function () {
+          if (submitted) window.location.href = 'fast-geschafft.html';
+        }, 2500);
+      });
+    })();
+  </script>
+</body>
+</html>

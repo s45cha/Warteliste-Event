@@ -1,0 +1,687 @@
+/* =============================================================
+   Entspannt Skalieren – Funnel
+   Gemeinsames Design-System für alle drei Seiten
+   (warteliste.html · fast-geschafft.html · dabei.html)
+
+   Farbwelt & Typografie übernommen von saschaboampong.de:
+   kühl, klar, professionell – helles Blaugrau-Weiß, tiefes
+   Marineblau-Ink, kräftiger Royalblau-Akzent, fette
+   serifenlose Headlines mit blau gesetzter Betonung.
+   ============================================================= */
+
+/* ---- Design Tokens ---------------------------------------- */
+:root {
+  /* Kühl-neutrale Basis */
+  --bg:          #F3F6FB;   /* helles Blaugrau-Weiß – Seitenhintergrund */
+  --bg-deep:     #E9EFF7;   /* leicht tiefer abgesetzt */
+  --surface:     #FFFFFF;   /* weiße Karten / Formularflächen */
+  --surface-2:   #EEF3FA;   /* zarte Abhebung */
+
+  --ink:         #16243B;   /* tiefes Marineblau – Headlines/Text */
+  --ink-soft:    #56657C;   /* Slate – Sekundärtext */
+  --ink-faint:   #93A1B5;   /* Micro-Copy / Hinweise */
+  --line:        #E2E9F2;   /* Rahmen / Trennlinien */
+
+  /* Akzent – kräftiges Royalblau */
+  --accent:        #2C6BE5;
+  --accent-hover:  #1E54C0;
+  --accent-soft:   #4E86EC;
+  --accent-tint:   #E7EEFC; /* sehr helle Akzentfläche */
+  --accent-line:   #CBDBF8;
+
+  /* Dunkle Marine-Sektion (wie Referenz-Block der Website) */
+  --navy-1: #0E2848;
+  --navy-2: #163A63;
+
+  /* Typografie – eine geometrische Grotesk, fett für Headlines */
+  --font-display: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-sans:    "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Maße */
+  --maxw: 720px;          /* Standard-Lesebreite */
+  --maxw-wide: 1080px;    /* Hero / breite Sektionen */
+  --radius: 16px;
+  --radius-sm: 11px;
+  --shadow: 0 1px 2px rgba(22,36,59,.05), 0 22px 50px -22px rgba(22,36,59,.22);
+  --shadow-soft: 0 1px 2px rgba(22,36,59,.04), 0 12px 30px -18px rgba(22,36,59,.18);
+}
+
+/* ---- Reset -------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  position: relative;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+/* ---- Atmosphäre: kühle Lichtverläufe (luftig, wie die Site) - */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 50% at 50% -10%, rgba(78,134,236,.16), transparent 68%),
+    radial-gradient(40% 36% at 100% 4%, rgba(44,107,229,.10), transparent 70%),
+    radial-gradient(55% 45% at 0% 100%, rgba(203,219,248,.30), transparent 72%);
+}
+
+/* ---- Layout-Hilfen ----------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: 22px;
+}
+.container--wide { max-width: var(--maxw-wide); }
+
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.page__main { flex: 1 0 auto; }
+
+/* Section-Abstand */
+.section { padding-block: clamp(40px, 8vw, 84px); }
+/* Erste Section direkt unter dem Hero: oben enger, damit
+   Headline + Subline + Formular auf Seite 1 above-the-fold bleiben. */
+.section--hero-follow { padding-top: clamp(28px, 4vw, 48px); }
+
+/* ---- Typografie -------------------------------------------- */
+.pre-headline {
+  font-family: var(--font-sans);
+  font-size: clamp(12.5px, 2.6vw, 14px);
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 20px;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+.pre-headline::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(33px, 6.6vw, 56px);
+  line-height: 1.06;
+  letter-spacing: -.025em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+/* Blau gesetzte Betonung im Headline-Stil der Website */
+.headline em, .em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.subline {
+  font-size: clamp(17px, 3.2vw, 21px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 22px 0 0;
+  max-width: 40ch;
+  text-wrap: pretty;
+}
+.subline--center { margin-inline: auto; }
+
+.lead {
+  font-size: clamp(17px, 3vw, 20px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1.5px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+/* ---- Buttons ----------------------------------------------- */
+.btn {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 28px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(22,36,59,.12), 0 12px 26px -10px rgba(44,107,229,.55);
+  transition: background .18s ease, transform .06s ease, box-shadow .18s ease;
+}
+.btn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 1px 2px rgba(22,36,59,.14), 0 16px 32px -10px rgba(44,107,229,.6);
+}
+.btn:active { transform: translateY(1px); }
+.btn--block { width: 100%; }
+
+/* ---- Formular (Opt-in) ------------------------------------- */
+.optin {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(22px, 4vw, 32px);
+  overflow: hidden;
+}
+.optin::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+}
+.optin__micro {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+  text-wrap: pretty;
+}
+.field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.input {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  width: 100%;
+  padding: 16px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--ink);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.input::placeholder { color: var(--ink-faint); }
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-tint);
+}
+.reassurance {
+  font-size: 14px;
+  color: var(--ink-faint);
+  margin: 15px 0 0;
+  text-wrap: pretty;
+}
+
+/* Ab Tablet: Feld + Button nebeneinander */
+@media (min-width: 560px) {
+  .field-row { flex-direction: row; }
+  .field-row .input { flex: 1 1 auto; }
+  .field-row .btn { flex: 0 0 auto; white-space: nowrap; }
+}
+
+/* ---- Hero-Bild-Platzhalter (Mockup, im Textfluss) ---------- */
+.mockup {
+  position: relative;
+  width: 100%;
+  margin: clamp(26px, 4vw, 36px) 0 0;
+  aspect-ratio: 16 / 10;
+  max-height: 360px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background:
+    radial-gradient(80% 130% at 72% 0%, rgba(78,134,236,.28), transparent 60%),
+    linear-gradient(135deg, #E8F0FB, #D9E6F7 60%, #CCDDF3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.mockup__label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  letter-spacing: .05em;
+  color: var(--ink-soft);
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(2px);
+  padding: 10px 16px;
+  border: 1px dashed var(--accent-line);
+  border-radius: 8px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* CTA unter der Subline */
+.cta-row { margin-top: clamp(22px, 3vw, 30px); }
+/* Mobil: Button über die volle Breite (sexy) – Desktop: kompakt */
+.cta-row .btn { width: 100%; }
+
+/* Hinweis vor dem Button */
+.optin-note {
+  font-size: 15.5px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin: 18px 0 0;
+  max-width: 48ch;
+  text-wrap: pretty;
+}
+
+/* ---- Hero: einspaltig (mobil) / zweispaltig (Desktop) ------ */
+.hero { padding-block: clamp(26px, 4vw, 52px); }
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 4vw, 28px);
+}
+.hero__media .proof { margin: 4px 0 clamp(52px, 9vw, 78px); }
+
+@media (min-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "head  media"
+      "rest  media";
+    column-gap: clamp(36px, 4.5vw, 64px);
+    row-gap: clamp(14px, 1.8vw, 22px);
+    align-items: start;
+  }
+  .hero__head  { grid-area: head; }
+  .hero__rest  { grid-area: rest; }
+  .hero__media { grid-area: media; align-self: center; }
+  /* Bildkomposition füllt die Bildspalte – maximal groß, zwei Spalten bleiben */
+  .hero__media .proof {
+    margin: 0 0 clamp(40px, 4.5vw, 58px);
+    max-width: 100%;
+    padding: 16px 16px 20px;
+  }
+  .hero__media .proof__photos { gap: 13px; }
+  .hero__media .proof__award {
+    width: clamp(96px, 11vw, 120px);
+    transform: translate(-50%, 42%) rotate(-4deg);
+    border-width: 4px;
+  }
+  /* Headline kompakter, damit auf dem Desktop alles above the fold passt */
+  .hero .headline { font-size: clamp(30px, 3.05vw, 42px); }
+  .hero .subline { margin-top: 16px; max-width: 42ch; }
+  .hero .cta-row .btn { width: auto; }
+}
+
+/* ---- Social-Proof-Komposition (zwei Gründer + Gold Award) -- */
+.proof {
+  position: relative;
+  margin: clamp(26px, 4vw, 36px) 0 clamp(60px, 10vw, 92px);
+  padding: clamp(16px, 3vw, 22px) clamp(16px, 3vw, 22px) clamp(26px, 4vw, 34px);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(90% 120% at 70% 0%, rgba(78,134,236,.20), transparent 62%),
+    linear-gradient(135deg, #E8F0FB, #D9E6F7 60%, #CCDDF3);
+  box-shadow: var(--shadow);
+}
+.proof__photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(12px, 2.4vw, 18px);
+}
+.proof__photo {
+  margin: 0;
+  border-radius: 13px;
+  overflow: hidden;
+  background: #DCE6F4;
+  box-shadow: 0 10px 28px -14px rgba(14,28,52,.45);
+  /* Originalhöhe der Fotos beibehalten, damit der Award unten sichtbar bleibt */
+  aspect-ratio: 2 / 3;
+}
+.proof__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+/* Gold-Award als überlappendes Badge unten mittig */
+.proof__award {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: clamp(104px, 18vw, 140px);
+  transform: translate(-50%, 46%) rotate(-4deg);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1c1c1c;
+  box-shadow: 0 16px 40px -12px rgba(14,28,52,.55);
+  border: 4px solid #fff;
+}
+.proof__award img { width: 100%; height: auto; display: block; }
+
+/* ---- Modal / Popup (Wartelisten-Eintrag) ------------------- */
+.modal[hidden] { display: none; }
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(14,28,52,.55);
+  backdrop-filter: blur(3px);
+  animation: modal-fade .2s ease;
+}
+.modal__dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 80px -24px rgba(14,28,52,.5);
+  padding: clamp(26px, 5vw, 38px);
+  overflow: hidden;
+  animation: modal-pop .24s cubic-bezier(.16,.84,.44,1);
+}
+.modal__dialog::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+}
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.modal__close:hover { background: var(--surface-2); color: var(--ink); }
+.modal__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 4vw, 27px);
+  letter-spacing: -.02em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 4px 36px 8px 0;
+}
+.modal__text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+  text-wrap: pretty;
+}
+
+/* Formularfelder im Popup */
+.form-field { margin-bottom: 14px; }
+.form-field__label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--ink);
+  margin: 0 0 7px;
+}
+.form-error {
+  margin: 0 0 14px;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  background: #FDE8E2;
+  border: 1px solid #F2643B;
+  color: #C5371A;
+  font-size: 14px;
+}
+.form-error[hidden] { display: none; }
+.btn[disabled] { opacity: .65; cursor: default; }
+
+@keyframes modal-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modal-pop {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---- Hero-Bild-Platzhalter (Alt, ungenutzt) ---------------- */
+.hero-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 8;
+  max-height: 320px;
+  background:
+    radial-gradient(80% 130% at 72% 0%, rgba(78,134,236,.28), transparent 60%),
+    linear-gradient(135deg, #E8F0FB, #D9E6F7 60%, #CCDDF3);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-media__label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  letter-spacing: .05em;
+  color: var(--ink-soft);
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(2px);
+  padding: 10px 16px;
+  border: 1px dashed var(--accent-line);
+  border-radius: 8px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ---- Schritt-Karten (Seite 2) ------------------------------ */
+.steps {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: 24px clamp(20px, 3vw, 28px);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.step:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.step__num {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--accent-tint);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent-line);
+}
+.step__body { flex: 1 1 auto; }
+.step__title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin: 6px 0 6px;
+  color: var(--ink);
+}
+.step__text {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* ---- Hinweis-Box ------------------------------------------- */
+.note {
+  margin-top: 28px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+/* ---- Tally-Embed-Bereich (Seite 3) ------------------------- */
+.embed-frame {
+  margin-top: 18px;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(10px, 2vw, 16px);
+}
+.embed-frame__placeholder {
+  width: 100%;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--accent-line);
+  border-radius: var(--radius-sm);
+  background:
+    radial-gradient(60% 80% at 50% 0%, var(--accent-tint), transparent 70%),
+    var(--surface-2);
+}
+.embed-frame__label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--ink-faint);
+  text-align: center;
+  padding: 0 16px;
+  line-height: 1.6;
+}
+
+.form-prompt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(21px, 3.8vw, 28px);
+  line-height: 1.25;
+  letter-spacing: -.015em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+.form-prompt__help {
+  font-size: 15px;
+  color: var(--ink-faint);
+  margin: 9px 0 0;
+}
+
+/* ---- Divider / Überleitung --------------------------------- */
+.transition-line {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  margin: 0;
+  padding-top: clamp(28px, 5vw, 44px);
+  border-top: 1px solid var(--line);
+}
+
+/* ---- Footer (identisch auf allen Seiten) ------------------- */
+.site-footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--line);
+  padding-block: 28px;
+  margin-top: clamp(40px, 8vw, 76px);
+}
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  font-size: 14px;
+  color: var(--ink-faint);
+}
+.site-footer a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s ease, color .15s ease;
+}
+.site-footer a:hover { color: var(--accent); border-color: var(--accent-line); }
+.site-footer__sep { color: var(--line); }
+
+/* ---- Utilities --------------------------------------------- */
+.center { text-align: center; }
+.mt-32 { margin-top: 32px; }
+.mt-40 { margin-top: 40px; }
+.stack > * + * { margin-top: 22px; }

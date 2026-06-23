@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Du bist dabei · Entspannt Skalieren</title>
+  <meta name="robots" content="noindex" />
+
+  <!-- Schriften -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- =========================================================
+       TRACKING (im <head>)
+       ACHTUNG: Vor Livegang prüfen, ob diese Site-IDs auf der neuen Subdomain event.entspanntskalieren.de gültig sind oder ob im jeweiligen Dashboard eine neue Domain/Site-ID angelegt werden muss.
+       Beide Snippets sind absichtlich auskommentiert – vor Livegang einkommentieren.
+       Hinweis: Bringt Vibetrack einen eigenen Cookie-/Consent-Banner mit, ist dieser der EINZIGE Consent-Layer – hier wird bewusst KEIN zweiter, eigener Cookie-Banner eingebaut.
+       ========================================================= -->
+
+  <!-- Rybbit -->
+  <!-- <script defer src="https://app.rybbit.io/api/script.js" data-site-id="d5ad8084cade"></script> -->
+
+  <!-- Vibetrack -->
+  <!-- <script defer src="https://vt.entspanntskalieren.de/script.js" data-site-id="VT-29D4DAB7-68626"></script> -->
+</head>
+
+<body>
+  <div class="page">
+    <main class="page__main">
+      <section class="section">
+        <div class="container">
+
+          <!-- 1) Headline -->
+          <p class="eyebrow">Bestätigt</p>
+          <h1 class="headline">Geschafft – <em>du bist dabei</em></h1>
+
+          <!-- 2) Text -->
+          <p class="subline">Du stehst jetzt auf der Warteliste. Wir melden uns, sobald das nächste Event steht – das erste planen wir in den kommenden Wochen.</p>
+
+          <!-- 3) Überleitung -->
+          <p class="transition-line mt-40">Eine kurze Sache noch, bevor du gehst:</p>
+
+          <!-- 4) Frage (Tally-Titel ist im Embed ausgeblendet → hier sichtbar) -->
+          <p class="form-prompt mt-32">Wenn du uns beim nächsten Event eine einzige Frage zu deinem Business stellen könntest – welche wäre das?</p>
+
+          <!-- 5) Eingebettetes Tally-Formular -->
+          <div class="embed-frame">
+            <iframe
+              data-tally-src="https://tally.so/embed/0QGyp6?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
+              loading="lazy"
+              width="100%"
+              height="259"
+              frameborder="0"
+              marginheight="0"
+              marginwidth="0"
+              title="Wenn du uns beim nächsten Event eine einzige Frage zu deinem Business stellen könntest – welche wäre das?"></iframe>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER (identisch auf allen drei Seiten) -->
+    <footer class="site-footer">
+      <div class="container container--wide site-footer__inner">
+        <span>© 2026 Entspannt Skalieren</span>
+        <span class="site-footer__sep" aria-hidden="true">·</span>
+        <a href="https://entspanntskalieren.de/datenschutz">Datenschutz</a>
+        <span class="site-footer__sep" aria-hidden="true">·</span>
+        <a href="https://entspanntskalieren.de/impressum">Impressum</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Tally-Widget: lädt die eingebetteten Formulare (data-tally-src) -->
+  <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+</body>
+</html>
