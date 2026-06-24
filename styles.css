@@ -109,7 +109,8 @@ body::before {
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 0 0 20px;
+  margin: 0 0 24px;
+  line-height: 1.55;
   display: inline-flex;
   align-items: flex-start;
   gap: 9px;
@@ -127,9 +128,9 @@ body::before {
 .headline {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(33px, 6.6vw, 56px);
-  line-height: 1.06;
-  letter-spacing: -.025em;
+  font-size: clamp(31px, 6.2vw, 54px);
+  line-height: 1.16;
+  letter-spacing: -.02em;
   color: var(--ink);
   margin: 0;
   text-wrap: balance;
@@ -142,9 +143,9 @@ body::before {
 
 .subline {
   font-size: clamp(17px, 3.2vw, 21px);
-  line-height: 1.55;
+  line-height: 1.72;
   color: var(--ink-soft);
-  margin: 22px 0 0;
+  margin: 24px 0 0;
   max-width: 40ch;
   text-wrap: pretty;
 }
@@ -323,55 +324,174 @@ body::before {
 }
 
 /* CTA unter der Subline */
-.cta-row { margin-top: clamp(22px, 3vw, 30px); }
-/* Mobil: Button über die volle Breite (sexy) – Desktop: kompakt */
+.cta-row { margin-top: clamp(20px, 3vw, 26px); }
+/* Mobil: Button über die volle Breite – Desktop: kompakt */
 .cta-row .btn { width: 100%; }
-
-/* Free-Hinweis: Events sind kostenlos */
-.free-note {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--ink);
-  margin: 12px 0 0;
-  text-wrap: pretty;
-}
 
 /* Hinweis vor dem Button */
 .optin-note {
-  font-size: 15.5px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.65;
   font-weight: 500;
   color: var(--ink-soft);
-  margin: 18px 0 0;
+  margin: clamp(18px, 3vw, 24px) 0 0;
   max-width: 48ch;
   text-wrap: pretty;
 }
+.subline strong { color: var(--ink); font-weight: 700; }
+
+/* ---- Stats-Strip (Trust-Signal) --------------------------- */
+.stats {
+  list-style: none;
+  margin: clamp(22px, 4vw, 30px) 0 0;
+  padding: 18px 4px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-block: 1px solid var(--line);
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-inline: clamp(6px, 2vw, 14px);
+  text-align: center;
+  position: relative;
+}
+.stat + .stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 64%;
+  width: 1px;
+  background: var(--line);
+}
+.stat__num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(20px, 4.4vw, 27px);
+  letter-spacing: -.02em;
+  color: var(--accent);
+  line-height: 1.05;
+  white-space: nowrap;
+}
+.stat__label {
+  font-size: clamp(11.5px, 2.4vw, 13px);
+  font-weight: 500;
+  color: var(--ink-soft);
+  line-height: 1.25;
+}
+
+/* ---- Trust-Row unter dem Button --------------------------- */
+.trust-row {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.trust-row li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.trust-row li::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background:
+    var(--accent-tint)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%232C6BE5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 12px no-repeat;
+}
 
 /* ---- Hero: einspaltig (mobil) / zweispaltig (Desktop) ------ */
-.hero { padding-block: clamp(26px, 4vw, 52px); }
+.hero { padding-block: clamp(24px, 4vw, 52px); }
 .hero__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(20px, 4vw, 28px);
+  gap: clamp(18px, 4vw, 28px);
 }
-.hero__media .proof { margin: 4px 0 clamp(52px, 9vw, 78px); }
+/* sanftes Einblenden für hochwertige Anmutung */
+.hero__head, .hero__media, .hero__rest {
+  animation: hero-in .6s cubic-bezier(.16,.84,.44,1) both;
+}
+.hero__media { animation-delay: .06s; }
+.hero__rest  { animation-delay: .12s; }
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobil: Bildkomposition kompakt halten */
+.hero__media { display: flex; flex-direction: column; align-items: center; }
+.hero__media .proof {
+  margin: 2px auto clamp(46px, 9vw, 70px);
+  max-width: 380px;
+}
+/* ---- Mobil-Reihenfolge & mehr Whitespace (bis 899px) ------ */
+@media (max-width: 899px) {
+  .hero__grid { gap: clamp(26px, 6vw, 36px); }
+  /* Reihenfolge: Headline → Foto/Award (Trust) → Stats → Button → Details.
+     Vertrauen zuerst, dann ein schneller CTA – Subline/Hinweis folgen. */
+  .hero__head  { order: 1; }
+  .hero__media { order: 2; }
+  .hero__rest  { order: 3; }
+
+  /* Bildkomposition kompakt halten, damit der CTA schnell erreichbar bleibt */
+  .hero__media .proof {
+    margin: 0 auto clamp(40px, 9vw, 58px);
+    max-width: 320px;
+  }
+  .hero__media .proof__award {
+    width: clamp(90px, 23vw, 108px);
+    transform: translate(-50%, 44%) rotate(-4deg);
+  }
+
+  .hero__rest {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 6vw, 30px);
+  }
+  .hero__rest > * { margin: 0; max-width: none; }
+  /* Logischer Lesefluss, Button als letzter Schritt (nichts hängt darunter) */
+  .hero__rest .subline    { order: 1; }
+  .hero__rest .stats      { order: 2; }
+  .hero__rest .optin-note { order: 3; }
+  .hero__rest .cta-row    { order: 4; }
+}
+.proof__names {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: center;
+  margin: 14px 0 0;
+}
 
 @media (min-width: 900px) {
+  .hero { padding-block: clamp(40px, 5vw, 64px); }
   .hero__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.06fr 0.94fr;
     grid-template-areas:
       "head  media"
       "rest  media";
-    column-gap: clamp(36px, 4.5vw, 64px);
-    row-gap: clamp(14px, 1.8vw, 22px);
+    column-gap: clamp(40px, 4.5vw, 68px);
+    row-gap: clamp(16px, 2vw, 24px);
     align-items: start;
   }
   .hero__head  { grid-area: head; }
   .hero__rest  { grid-area: rest; }
   .hero__media { grid-area: media; align-self: center; }
-  /* Bildkomposition füllt die Bildspalte – maximal groß, zwei Spalten bleiben */
+  /* Bildkomposition füllt die Bildspalte */
   .hero__media .proof {
-    margin: 0 0 clamp(40px, 4.5vw, 58px);
+    margin: 0 auto clamp(40px, 4.5vw, 56px);
     max-width: 100%;
     padding: 16px 16px 20px;
   }
@@ -381,9 +501,10 @@ body::before {
     transform: translate(-50%, 42%) rotate(-4deg);
     border-width: 4px;
   }
+  .proof__names { margin-top: clamp(18px, 3vw, 26px); }
   /* Headline kompakter, damit auf dem Desktop alles above the fold passt */
-  .hero .headline { font-size: clamp(30px, 3.05vw, 42px); }
-  .hero .subline { margin-top: 16px; max-width: 42ch; }
+  .hero .headline { font-size: clamp(29px, 3vw, 41px); }
+  .hero .subline { margin-top: 4px; max-width: 44ch; }
   .hero .cta-row .btn { width: auto; }
 }
 

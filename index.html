@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=7" />
 
   <!-- =========================================================
        TRACKING (im <head>)
@@ -41,47 +41,58 @@
               <p class="pre-headline">Für Coaches, Berater, Dienstleister &amp; Personal Brands mit eigenem Online-Business</p>
 
               <!-- 2) Haupt-Headline -->
-              <h1 class="headline">Stell dir vor, du hättest zwei Mitgründer mit 10 Jahren Erfahrung und 10 Millionen Euro Gesamtumsatz, die du alles fragen kannst</h1>
+              <h1 class="headline">Stell dir vor, du hättest <em>zwei Mitgründer</em> mit 10 Jahren Erfahrung und <em>10 Millionen Euro Gesamtumsatz</em>, die du alles fragen kannst</h1>
             </div>
 
-            <!-- 3) Mockup: beide Gründer + gemeinsamer Gold Award -->
+            <!-- 3) Social Proof: beide Gründer + gemeinsamer Gold Award -->
             <div class="hero__media">
-              <div class="proof">
+              <figure class="proof">
                 <div class="proof__photos">
-                  <figure class="proof__photo">
-                    <img src="images/gruender-1.png" alt="Mitgründer mit dem Gold Award" />
-                  </figure>
-                  <figure class="proof__photo">
-                    <img src="images/gruender-2.png" alt="Mitgründer mit dem Gold Award" />
-                  </figure>
+                  <div class="proof__photo">
+                    <img src="images/gruender-1.png" alt="Timo Eckhardt mit dem Gold Award für 2.000.000 € Umsatz" />
+                  </div>
+                  <div class="proof__photo">
+                    <img src="images/gruender-2.png" alt="Sascha Boampong mit dem Gold Award für 2.000.000 € Umsatz" />
+                  </div>
                 </div>
                 <div class="proof__award">
                   <img src="images/gold-award.png" alt="Gold Award – verliehen an Timo Eckhardt &amp; Sascha Boampong für 8.000.000 € Umsatz" />
                 </div>
-              </div>
+              </figure>
+              <figcaption class="proof__names">Timo Eckhardt &amp; Sascha Boampong</figcaption>
             </div>
 
-            <!-- Rest: Subline + Hinweis + Button + Reassurance -->
+            <!-- Rest: Subline + Stats + Hinweis + Button + Reassurance -->
             <div class="hero__rest">
               <!-- 4) Subline -->
-              <p class="subline">Wir machen regelmäßige Online-Events zu allem rund um ein entspanntes und profitables Online-Business. Live und ohne Folien.</p>
+              <p class="subline">Wir machen regelmäßige kostenlose Online-Events zu allem rund um ein entspanntes und profitables Online-Business. Live. Ohne Folien. Ohne Webinar-Pitch. Dafür mit 100 % Insights aus echtem Online-Unternehmertum.</p>
 
-              <!-- 5) Hinweis vor dem Button -->
+              <!-- 5) Stats-Strip (scannbarer Trust-Signal) -->
+              <ul class="stats">
+                <li class="stat">
+                  <span class="stat__num">10</span>
+                  <span class="stat__label">Jahre Erfahrung</span>
+                </li>
+                <li class="stat">
+                  <span class="stat__num">10 Mio €</span>
+                  <span class="stat__label">Gesamtumsatz</span>
+                </li>
+                <li class="stat">
+                  <span class="stat__num">100 %</span>
+                  <span class="stat__label">aus der Praxis</span>
+                </li>
+              </ul>
+
+              <!-- 6) Hinweis vor dem Button -->
               <p class="optin-note">Trag dich ein, und wir sagen dir Bescheid, sobald das nächste Event ansteht. Das erste Event startet in den kommenden Wochen.</p>
 
-              <!-- Free-Hinweis: Events sind kostenlos -->
-              <p class="free-note">Wir machen regelmäßig kostenlose Online-Events.</p>
-
-              <!-- 6) Call-to-Action – öffnet das Wartelisten-Popup -->
+              <!-- 7) Call-to-Action – öffnet das Wartelisten-Popup -->
               <div class="cta-row">
                 <button type="button" class="btn btn--stack" data-open-modal>
                   <span class="btn__main">Unverbindlich in die Warteliste eintragen <span class="btn__arrows" aria-hidden="true">&raquo;</span></span>
                   <span class="btn__sub">Du wirst als Erstes über neue Events informiert.</span>
                 </button>
               </div>
-
-              <!-- 7) Reassurance unter dem Button -->
-              <p class="reassurance">Kein Spam. Wir melden uns nur, wenn’s wirklich ein Event gibt.</p>
             </div>
 
           </div>
